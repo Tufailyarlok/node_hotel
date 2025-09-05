@@ -32,5 +32,17 @@ app.post('/menu', async (req,res)=>{
 })
 
 
+app.get('/menu', async(req,res)=>{
+    try{
+        let data=menuModel.find();
+        console.log(data);
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
 
 app.listen(PORT);  
