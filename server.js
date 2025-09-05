@@ -31,15 +31,15 @@ app.post('/menu', async (req,res)=>{
     }
 })
 
-
 app.get('/menu', async (req, res) => {
     try {
-      const data = await menuModel.find();
+      // Await the query to get real documents, not the query object
+      const data = await menuModel.find({});
       console.log("✅ Data fetched:", data);
       res.status(200).json(data);
     } catch (err) {
-      console.error("❌ GET /menu error:", err.message);
-      res.status(500).json({ error: err.message, stack: err.stack });
+      console.error("❌ GET /menu error:", err);
+      res.status(500).json({ error: err.message });
     }
   });
   
