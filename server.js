@@ -32,17 +32,20 @@ app.post('/menu', async (req,res)=>{
 })
 
 
-app.get('/menu', async(req,res)=>{
-    try{
-        let data=await menuModel.find();
-        console.log(data);
-        res.status(200).json(data);
+app.get('/menu', async (req, res) => {
+    try {
+      const data = await menuModel.find();
+      console.log("✅ Data fetched:", data);
+      res.status(200).json(data);
+    } catch (err) {
+      console.error("❌ GET /menu error:", err.message);
+      res.status(500).json({ error: err.message, stack: err.stack });
     }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-})
+  });
+  
 
 
-app.listen(PORT);  
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+  

@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const menuItem=new mongoose.Schema({
+const menuItem= mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -12,8 +12,7 @@ const menuItem=new mongoose.Schema({
     taste:{
         type:String,
         enum:['sweet','spicy','sour'],
-        required:true,
-        default:false
+        required:true
     },
     ingredients:{
         type:[String],
