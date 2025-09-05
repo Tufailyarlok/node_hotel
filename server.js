@@ -2,10 +2,15 @@ const express = require('express');
 const app = express();
 const db = require('./db');
 
+require('dotenv').config();
+
 const menuModel=require('./models/menu')
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
+const PORT=process.env.PORT || 3000;
+
 
 const personRoutes=require('./routes/personRoutes');
 app.use('/person',personRoutes);
@@ -28,5 +33,4 @@ app.post('/menu', async (req,res)=>{
 
 
 
-
-app.listen(3000);  
+app.listen(PORT);  

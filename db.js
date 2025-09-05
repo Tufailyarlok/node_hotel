@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
-const mongoURL="mongodb://localhost:27017/person"
+require('dotenv').config();
+
+// const mongoURL="mongodb://localhost:27017/person"
+const mongoURL=process.env.MONGODB_URL;
+
+
+
 
 mongoose.connect(mongoURL).then(()=>console.log("connected by tufail"))
 .catch((err)=>console.error("conection err",err));
