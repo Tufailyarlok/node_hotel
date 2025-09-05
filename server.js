@@ -34,7 +34,7 @@ app.post('/menu', async (req,res)=>{
 
 app.get('/menu', async(req,res)=>{
     try{
-        let data=menuModel.find();
+        let data=await menuModel.find();
         console.log(data);
         res.status(200).json(data);
     }
