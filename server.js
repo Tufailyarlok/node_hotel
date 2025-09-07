@@ -1,51 +1,28 @@
 const express = require('express');
 const app = express();
-const db = require('./db');
-
+const db = require('./db')
 require('dotenv').config();
-
-const menuModel=require('./models/menu')
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
-const PORT=process.env.PORT || 3000;
-
-
-const personRoutes=require('./routes/personRoutes');
-app.use('/person',personRoutes);
+const personRoutes = require('./routes/personRoutes');
 
 
+const menuRoute = require('./routes/menuRoutes');
+app.use('/menu', menuRoute);
 
 
-app.post('/menu', async (req,res)=>{
-    try{
-        let data=req.body;
-        let savedData=await menuModel.insertMany(data);
-        console.log(savedData);
-        res.status(200).json(savedData);
-    }
-    catch(err){
-        console.log("some error occured",err);
-        res.status(400).json(err);
-    }
+
+app.use('/person', personRoutes);
+
+
+app.get('/', function (req,res){
+  res.send('welcome to my hotel');
 })
-
-app.get('/menu', async (req, res) => {
-    try {
-      // Await the query to get real documents, not the query object
-      const data = await menuModel.find({});
-      console.log("✅ Data fetched:", data);
-      res.status(200).json(data);
-    } catch (err) {
-      console.error("❌ GET /menu error:", err);
-      res.status(500).json({ error: err.message });
-    }
-  });
-  
 
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-  
+  console.log(`Server running on port ${PORT}`);
+});
